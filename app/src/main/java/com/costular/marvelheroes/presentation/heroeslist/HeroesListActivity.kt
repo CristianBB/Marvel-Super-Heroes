@@ -25,7 +25,7 @@ class HeroesListActivity : AppCompatActivity() {
 
     lateinit var heroesListViewModel: HeroesListViewModel
 
-    private val adapter = HeroesListAdapter { hero, image -> onHeroClicked(hero, image)}
+    private val adapter = HeroesListAdapter { heroName, image -> onHeroClicked(heroName, image)}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         inject()
@@ -77,8 +77,8 @@ class HeroesListActivity : AppCompatActivity() {
         heroesListLoading.visibility = if(isLoading) View.VISIBLE else View.GONE
     }
 
-    private fun onHeroClicked(hero: MarvelHeroEntity, image: View) {
-        navigator.goToHeroDetail(this, hero, image)
+    private fun onHeroClicked(heroName: String, image: View) {
+        navigator.goToHeroDetail(this, heroName, image)
     }
 
 

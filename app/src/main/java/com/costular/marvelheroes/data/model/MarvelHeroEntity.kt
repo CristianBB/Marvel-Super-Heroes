@@ -1,11 +1,9 @@
 package com.costular.marvelheroes.data.model
 
 import android.annotation.SuppressLint
-import android.arch.persistence.room.Embedded
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 import android.arch.persistence.room.TypeConverters
-import android.os.Parcel
 import android.os.Parcelable
 import com.costular.marvelheroes.data.db.Converters
 import kotlinx.android.parcel.Parcelize
@@ -25,5 +23,7 @@ data class MarvelHeroEntity(
         val height: String,
         val power: String,
         val abilities: String,
-        val groups: Array<String>
+        val groups: Array<String>,
+        var isFavorite: Boolean
 ) : Parcelable
+

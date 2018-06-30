@@ -11,12 +11,17 @@ import io.reactivex.Flowable
 class MarvelHeroesRepository (private val localMarvelHeroesDataSource: LocalMarvelHeroesDataSource,
                               private val remoteMarvelHeroesDataSource: RemoteMarvelHeroesDataSource) {
 
+    fun getMarvelHero(name: String): Flowable<MarvelHeroEntity> = localMarvelHeroesDataSource.getMarvelHero(name)
+
     fun getMarvelHeroesList(): Flowable<List<MarvelHeroEntity>> =
             getMarvelHeroesFromDb().concatWith(getMarvelHeroesFromRemote())
+
+    fun updateMarvelHero(hero: MarvelHeroEntity) = localMarvelHeroesDataSource.updateMarvelHero(hero)
 
     private fun getMarvelHeroesFromDb(): Flowable<List<MarvelHeroEntity>> = localMarvelHeroesDataSource.getMarvelHeroesList()
 
     private fun getMarvelHeroesFromRemote(): Flowable<List<MarvelHeroEntity>> =
             remoteMarvelHeroesDataSource.getMarvelHeroesList()
                     .doOnNext{localMarvelHeroesDataSource.saveMarvelHeroes(it)}
+
 }

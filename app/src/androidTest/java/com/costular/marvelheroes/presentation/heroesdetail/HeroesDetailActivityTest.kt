@@ -37,7 +37,7 @@ class HeroesDetailActivityTest {
                 InstrumentationRegistry.getTargetContext(),
                 MarvelHeroeDetailActivity::class.java
         ).apply {
-            putExtra(MarvelHeroeDetailActivity.PARAM_HEROE, FakeData.IRON_MAN)
+            putExtra(MarvelHeroeDetailActivity.PARAM_HEROE_ID, FakeData.IRON_MAN)
         }
         activityTestRule.launchActivity(intent)
 

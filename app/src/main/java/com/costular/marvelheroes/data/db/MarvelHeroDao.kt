@@ -10,9 +10,13 @@ abstract class MarvelHeroDao {
     @Query("SELECT * FROM heroes")
     abstract fun getAllHeroes(): Maybe<List<MarvelHeroEntity>>
 
+    @Query("SELECT * FROM heroes WHERE name = :name")
+    abstract fun getHero(name: String): Maybe<MarvelHeroEntity>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     abstract fun insertAll(heroes: List<MarvelHeroEntity>)
 
     @Update
     abstract fun update(heroe: MarvelHeroEntity)
+
 }

@@ -13,11 +13,11 @@ import com.costular.marvelheroes.presentation.heroedetail.MarvelHeroeDetailActiv
  */
 class Navigator {
 
-    fun goToHeroDetail(activity: Activity, hero: MarvelHeroEntity, image: View) {
+    fun goToHeroDetail(activity: Activity, heroName: String, image: View) {
         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, image,
                 ViewCompat.getTransitionName(image))
         val intent = Intent(activity, MarvelHeroeDetailActivity::class.java).apply {
-            putExtra(MarvelHeroeDetailActivity.PARAM_HEROE, hero)
+            putExtra(MarvelHeroeDetailActivity.PARAM_HEROE_ID, heroName)
         }
 
         activity.startActivity(intent, options.toBundle())

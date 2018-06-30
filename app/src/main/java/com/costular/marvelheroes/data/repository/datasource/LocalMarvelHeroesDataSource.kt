@@ -30,4 +30,9 @@ class LocalMarvelHeroesDataSource(val marvelHeroDatabase: MarvelHeroDatabase): M
                 .subscribe()
     }
 
+    fun getMarvelHero(name: String): Flowable<MarvelHeroEntity> =
+            marvelHeroDatabase
+                    .getHeroDao()
+                    .getHero(name)
+                    .toFlowable()
 }

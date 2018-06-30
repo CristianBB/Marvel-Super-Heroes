@@ -4,7 +4,9 @@ import android.arch.persistence.room.Database
 import android.arch.persistence.room.RoomDatabase
 import com.costular.marvelheroes.data.model.MarvelHeroEntity
 
-@Database(entities = [MarvelHeroEntity::class], version = 1)
+
+
+@Database(entities = [MarvelHeroEntity::class], version = 2)
 abstract class MarvelHeroDatabase: RoomDatabase() {
 
     abstract fun getHeroDao(): MarvelHeroDao
