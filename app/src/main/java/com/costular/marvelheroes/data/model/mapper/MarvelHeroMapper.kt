@@ -1,7 +1,7 @@
 package com.costular.marvelheroes.data.model.mapper
 
 import com.costular.marvelheroes.data.model.MarvelHero
-import com.costular.marvelheroes.domain.model.MarvelHeroEntity
+import com.costular.marvelheroes.data.model.MarvelHeroEntity
 
 /**
  * Created by costular on 17/03/2018.

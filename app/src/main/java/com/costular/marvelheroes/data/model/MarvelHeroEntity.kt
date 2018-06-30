@@ -1,4 +1,4 @@
-package com.costular.marvelheroes.domain.model
+package com.costular.marvelheroes.data.model
 
 import android.annotation.SuppressLint
 import android.os.Parcel

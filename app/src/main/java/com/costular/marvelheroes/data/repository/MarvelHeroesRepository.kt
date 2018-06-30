@@ -1,10 +1,8 @@
 package com.costular.marvelheroes.data.repository
 
-import com.costular.marvelheroes.data.model.mapper.MarvelHeroMapper
 import com.costular.marvelheroes.data.repository.datasource.RemoteMarvelHeroesDataSource
-import com.costular.marvelheroes.domain.model.MarvelHeroEntity
+import com.costular.marvelheroes.data.model.MarvelHeroEntity
 import io.reactivex.Flowable
-import io.reactivex.Observable
 
 /**
  * Created by costular on 17/03/2018.

@@ -3,7 +3,6 @@ package com.costular.marvelheroes.presentation.heroedetail
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.app.AppCompatDelegate
 import android.view.MenuItem
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -11,7 +10,7 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.costular.marvelheroes.R
-import com.costular.marvelheroes.domain.model.MarvelHeroEntity
+import com.costular.marvelheroes.data.model.MarvelHeroEntity
 import kotlinx.android.synthetic.main.activity_hero_detail.*
 
 /**

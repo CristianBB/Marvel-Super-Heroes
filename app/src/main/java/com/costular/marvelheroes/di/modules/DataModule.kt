@@ -2,7 +2,7 @@ package com.costular.marvelheroes.di.modules
 
 import com.costular.marvelheroes.data.model.mapper.MarvelHeroMapper
 import com.costular.marvelheroes.data.net.MarvelHeroesService
-import com.costular.marvelheroes.data.repository.MarvelHeroesRepositoryImpl
+import com.costular.marvelheroes.data.repository.MarvelHeroesRepository
 import com.costular.marvelheroes.data.repository.datasource.RemoteMarvelHeroesDataSource
 import dagger.Module
 import dagger.Provides
@@ -20,15 +20,14 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideRemoteMarvelHeroesDataSoruce(marvelHeroesService: MarvelHeroesService)
-            : RemoteMarvelHeroesDataSource =
-            RemoteMarvelHeroesDataSource(marvelHeroesService)
+    fun provideRemoteMarvelHeroesDataSource(marvelHeroesService: MarvelHeroesService,
+                                            marvelHeroesMapper: MarvelHeroMapper): RemoteMarvelHeroesDataSource =
+            RemoteMarvelHeroesDataSource(marvelHeroesService, marvelHeroesMapper)
 
     @Provides
     @Singleton
     fun provideMarvelHeroesRepository(
-            marvelRemoteMarvelHeroesDataSource: RemoteMarvelHeroesDataSource,
-            marvelHeroMapper: MarvelHeroMapper): MarvelHeroesRepositoryImpl =
-            MarvelHeroesRepositoryImpl(marvelRemoteMarvelHeroesDataSource, marvelHeroMapper)
+            marvelRemoteMarvelHeroesDataSource: RemoteMarvelHeroesDataSource): MarvelHeroesRepository =
+            MarvelHeroesRepository(marvelRemoteMarvelHeroesDataSource)
 
 }

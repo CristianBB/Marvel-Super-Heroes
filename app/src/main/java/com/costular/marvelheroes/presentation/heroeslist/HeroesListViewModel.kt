@@ -1,27 +1,36 @@
 package com.costular.marvelheroes.presentation.heroeslist
 
 import android.arch.lifecycle.MutableLiveData
-import com.costular.marvelheroes.domain.model.MarvelHeroEntity
-import com.costular.marvelheroes.domain.usecase.GetMarvelHeroesList
+import android.util.Log
+import com.costular.marvelheroes.data.repository.MarvelHeroesRepository
+import com.costular.marvelheroes.data.model.MarvelHeroEntity
 import com.costular.marvelheroes.presentation.util.mvvm.BaseViewModel
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.addTo
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class HeroesListViewModel @Inject constructor(): BaseViewModel() {
+class HeroesListViewModel @Inject constructor(val marvelHeroesRepository: MarvelHeroesRepository): BaseViewModel() {
 
-    val heroListState: MutableLiveData<List<MarvelHeroEntity>> = MutableLiveData()
+    val heroesListState: MutableLiveData<List<MarvelHeroEntity>> = MutableLiveData()
     val isLoadingState: MutableLiveData<Boolean> = MutableLiveData()
 
-    fun loadMarvelHeroes() {
-
-
-        view.showLoading(true)
-        getMarvelHeroesList.execute({ heroes ->
-            view.showHeroesList(heroes)
-            view.showLoading(false)
-        }, {
-            view.showError(it.toString())
-            view.showLoading(false)
-        })
+    fun loadMarvelHeroesList() {
+        marvelHeroesRepository.getMarvelHeroesList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe {isLoadingState.postValue(true)}
+                .doOnTerminate {isLoadingState.postValue(false)}
+                .subscribeBy(
+                        onNext = {
+                            heroesListState.value = it
+                        },
+                        onError = {
+                            Log.d("HeroesListViewModel", it.toString())
+                        }
+                )
+                .addTo(compositeDisposable)
     }
 
 }

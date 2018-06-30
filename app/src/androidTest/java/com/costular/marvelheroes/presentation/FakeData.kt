@@ -1,6 +1,6 @@
 package com.costular.marvelheroes.presentation
 
-import com.costular.marvelheroes.domain.model.MarvelHeroEntity
+import com.costular.marvelheroes.data.model.MarvelHeroEntity
 
 /**
  * Created by costular on 18/03/2018.
