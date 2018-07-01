@@ -91,7 +91,6 @@ class MarvelHeroeDetailActivity : AppCompatActivity() {
 
                     override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
                         supportStartPostponedEnterTransition()
-                        loadFavoriteImageButton(resource, hero.isFavorite)
                         return false
                     }
                 })
@@ -103,30 +102,14 @@ class MarvelHeroeDetailActivity : AppCompatActivity() {
         heroDetailPower.text = hero.power
         heroDetailAbilities.text = hero.abilities
 
-        heroFavoriteButton.setOnClickListener{button ->
-            onFavoriteClicked(button, hero)
-        }
-    }
-
-    private fun loadFavoriteImageButton(drawable: Drawable?, isFavorite: Boolean) {
-        if (isFavorite) {
+        if (hero.isFavorite) {
             heroFavoriteButton.setImageResource(R.drawable.ic_favorite_true)
         } else {
             heroFavoriteButton.setImageResource(R.drawable.ic_favorite_false)
         }
 
-        drawable?.let {
-            val imageBitmap = it.toBitmap()
-
-            android.support.v7.graphics.Palette.from(imageBitmap).generate { palette ->
-                val vibrant = palette.dominantSwatch
-                vibrant?.let {
-
-                    var mDrawable = heroFavoriteButton.drawable
-                    mDrawable.setColorFilter(PorterDuffColorFilter(vibrant.rgb, PorterDuff.Mode.MULTIPLY))
-                    heroFavoriteButton.setImageDrawable(mDrawable)
-                }
-            }
+        heroFavoriteButton.setOnClickListener{button ->
+            onFavoriteClicked(button, hero)
         }
     }
 
