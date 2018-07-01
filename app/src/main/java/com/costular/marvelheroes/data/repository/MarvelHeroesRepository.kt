@@ -23,5 +23,6 @@ class MarvelHeroesRepository (private val localMarvelHeroesDataSource: LocalMarv
     private fun getMarvelHeroesFromRemote(): Flowable<List<MarvelHeroEntity>> =
             remoteMarvelHeroesDataSource.getMarvelHeroesList()
                     .doOnNext{localMarvelHeroesDataSource.saveMarvelHeroes(it)}
+                    .onErrorResumeNext(getMarvelHeroesFromDb())
 
 }
