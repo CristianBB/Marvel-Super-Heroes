@@ -6,7 +6,7 @@ import com.costular.marvelheroes.data.model.MarvelHeroEntity
 
 
 
-@Database(entities = [MarvelHeroEntity::class], version = 2)
+@Database(entities = [MarvelHeroEntity::class], version = 3)
 abstract class MarvelHeroDatabase: RoomDatabase() {
 
     abstract fun getHeroDao(): MarvelHeroDao

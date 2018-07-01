@@ -9,6 +9,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:focusableInTouchMode="true"
     xmlns:tools="http://schemas.android.com/tools"
     android:paddingBottom="16dp">
 
@@ -27,7 +28,7 @@
             android:layout_width="40sp"
             android:layout_height="40sp"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_favorite_true"
+            android:src="@drawable/ic_favorite_false"
             android:background="@null"
             android:layout_gravity="right"
             android:layout_marginRight="10dp"
@@ -36,12 +37,12 @@
 
     <TextView
         android:id="@+id/heroDetailName"
+        style="@style/HeroDetailName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Iron Man"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        style="@style/HeroDetailName" />
+        tools:text="Iron Man" />
 
     <TextView
         android:id="@+id/heroDetailRealName"
@@ -71,6 +72,64 @@
         style="@style/HeroDetailAbilities"
         tools:text="Tony has a genius level intellect that allows him to invent a wide range of sophisticated devices, specializing in advanced weapons and armor. He possesses a keen business mind." />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/HeroDetailReviewTitle"
+        android:text="Review"/>
+
+    <LinearLayout
+        android:id="@+id/heroDetailValorationContainer"
+        style="@style/heroDetailValorationContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:tag="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_star_border"/>
+
+        <ImageView
+            android:tag="2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_star_border"/>
+
+        <ImageView
+            android:tag="3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_star_border"/>
+
+        <ImageView
+            android:tag="4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_star_border"/>
+
+        <ImageView
+            android:tag="5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_star_border"/>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/heroDetailReviewComments"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/heroDetailReviewComments"
+        android:hint="Review comments..."/>
+
+    <Button
+        android:id="@+id/heroDetailReviewButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/heroDetailReviewButton"
+        android:layout_gravity="right"
+        android:text="Save Comments"/>
 </LinearLayout>
 
 </ScrollView>

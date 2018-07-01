@@ -24,6 +24,8 @@ data class MarvelHeroEntity(
         val power: String,
         val abilities: String,
         val groups: Array<String>,
-        var isFavorite: Boolean
+        var isFavorite: Boolean,
+        var valoration: Int,
+        var review: String
 ) : Parcelable
 

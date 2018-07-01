@@ -20,7 +20,10 @@ import kotlinx.android.synthetic.main.activity_hero_detail.*
 import javax.inject.Inject
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
+import android.util.Log
 import android.view.View
+import android.view.WindowManager
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.graphics.drawable.toBitmap
 
@@ -56,8 +59,8 @@ class MarvelHeroeDetailActivity : AppCompatActivity() {
             setHomeButtonEnabled(true)
         }
         supportPostponeEnterTransition() // Wait for image load and then draw the animation
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN) // Evita que el teclado aparezca al iniciar la Activity
         setUpViewModel()
-
     }
 
     private fun setUpViewModel() {
@@ -101,6 +104,7 @@ class MarvelHeroeDetailActivity : AppCompatActivity() {
         heroDetailHeight.text = hero.height
         heroDetailPower.text = hero.power
         heroDetailAbilities.text = hero.abilities
+        heroDetailReviewComments.setText(hero.review)
 
         if (hero.isFavorite) {
             heroFavoriteButton.setImageResource(R.drawable.ic_favorite_true)
@@ -108,8 +112,38 @@ class MarvelHeroeDetailActivity : AppCompatActivity() {
             heroFavoriteButton.setImageResource(R.drawable.ic_favorite_false)
         }
 
+        // Valoración
+        val rangeTo = heroDetailValorationContainer.childCount - 1
+        for (i in 0..rangeTo) {
+
+            val child = heroDetailValorationContainer.getChildAt(i)
+
+            if (child is ImageView) {
+                val tag = child.tag.toString()
+                val tagInt = tag.toInt()
+
+                // Listener de Valoracion
+                child.setOnClickListener{
+                    onValorationClicked(it, tagInt, hero)
+                }
+
+                // Pintado de valoración actual
+                if (tagInt <= hero.valoration) {
+                    child.setImageResource(R.drawable.ic_star)
+                } else {
+                    child.setImageResource(R.drawable.ic_star_border)
+                }
+            }
+        }
+
+        // Listener de botón Favorito
         heroFavoriteButton.setOnClickListener{button ->
             onFavoriteClicked(button, hero)
+        }
+
+        // Listener de botón Guardar Comentarios
+        heroDetailReviewButton.setOnClickListener {
+            onSaveCommentsClicked(it, hero)
         }
     }
 
@@ -127,5 +161,15 @@ class MarvelHeroeDetailActivity : AppCompatActivity() {
         hero.isFavorite = !hero.isFavorite
         marvelHeroeDetailViewModel.updateHeroe(hero)
 
+    }
+
+    private fun onValorationClicked(view: View, valoration: Int, hero: MarvelHeroEntity) {
+        hero.valoration = valoration
+        marvelHeroeDetailViewModel.updateHeroe(hero)
+    }
+
+    private fun onSaveCommentsClicked(view: View, hero: MarvelHeroEntity) {
+        hero.review = heroDetailReviewComments.text.toString()
+        marvelHeroeDetailViewModel.updateHeroe(hero)
     }
 }
