@@ -22,7 +22,7 @@ class MarvelHeroMapperTest {
     @Test
     fun `Transform MarvelHero into MarvelHeroEntity`() {
         // Given
-        val marvelHero = MarvelHero("Iron Man", "http://ironman.com")
+        val marvelHero = MarvelHero("Iron Man", "http://ironman.com", "Tony Stark", "1.85m", "None", "Genius", "avengers")
 
         // When
         val marvelHeroEntity = marvelHeroMapper.transform(marvelHero)
@@ -30,6 +30,11 @@ class MarvelHeroMapperTest {
         // Then
         Assertions.assertThat(marvelHeroEntity.name).isEqualTo(marvelHero.name)
         Assertions.assertThat(marvelHeroEntity.photoUrl).isEqualTo(marvelHero.photoUrl)
+        Assertions.assertThat(marvelHeroEntity.realName).isEqualTo(marvelHero.realName)
+        Assertions.assertThat(marvelHeroEntity.height).isEqualTo(marvelHero.height)
+        Assertions.assertThat(marvelHeroEntity.power).isEqualTo(marvelHero.power)
+        Assertions.assertThat(marvelHeroEntity.abilities).isEqualTo(marvelHero.abilities)
+
     }
 
     @Test
